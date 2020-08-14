@@ -7,7 +7,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"math"
 	"os"
 	"strings"
 )
@@ -48,8 +47,9 @@ func main() {
 		log.Panic("len(sat.Clauses) == 0")
 	}
 
-	log.Printf("problem contains %d variables (search space: %.0f) and %d clauses",
-	           len(sat.Variables), math.Exp2(float64(len(sat.Variables))), len(sat.Clauses))
+	//log.Printf("problem contains %d variables (search space: %.0f) and %d clauses",
+	//           len(sat.Variables), math.Exp2(float64(len(sat.Variables))), len(sat.Clauses))
+	log.Printf("problem contains %d variables and %d clauses", len(sat.Variables), len(sat.Clauses))
 
 	solutions := make(chan string)
 	go sat.Solve(solutions)

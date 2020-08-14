@@ -57,6 +57,10 @@ func (sat *SAT) ParseLine(line string) {
 	if len(clause) == 0 {
 		log.Panic("len(clause) == 0")
 	}
+
+	// TODO Check prior to storing to verify the clause is not a duplicate.
+	//      Can be done by sorting and storing in a map (pseudo-set) temporarily.
+
 	sat.Clauses = append(sat.Clauses, clause)
 }
 

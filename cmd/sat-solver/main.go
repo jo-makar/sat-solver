@@ -4,6 +4,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"math"
@@ -12,14 +13,21 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "usage: sat-solver <file>\n")
+	var setOnly bool
+
+	flag.BoolVar(&setOnly, "set", false, "display only set variables in solutions")
+	flag.BoolVar(&setOnly, "s", false, "display only set variables in solutions")
+
+	flag.Parse()
+
+	if flag.NArg() != 1 {
+		fmt.Fprintf(os.Stderr, "usage: sat-solver [flags] <file>\n")
 		os.Exit(1)
 	}
 
 	sat := SAT{}
 
-	if file, err := os.Open(os.Args[1]); err != nil {
+	if file, err := os.Open(flag.Args()[0]); err != nil {
 		log.Panic(err)
 	} else {
 		defer file.Close()
@@ -46,6 +54,22 @@ func main() {
 	solutions := make(chan string)
 	go sat.Solve(solutions)
 	for solution := range solutions {
+		if setOnly {
+			var b strings.Builder
+			first := true
+			for _, l := range strings.Fields(solution) {
+				if strings.HasPrefix(l, "~") {
+					continue
+				}
+				if !first {
+					b.WriteString(" ")
+				}
+				b.WriteString(l)
+				first = false
+			}
+			solution = b.String()
+		}
+
 		log.Printf("solution = %s", solution)
 	}
 }

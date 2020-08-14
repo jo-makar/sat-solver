@@ -13,6 +13,8 @@ $ go run ./cmd/sat-solver <(echo -e 'a b c\na ~b\n~b c')
 2020/08/13 20:12:24 solution = a b c
 ```
 
+# Toy applications
+
 ## four-color
 
 Convert the Four color theorem (https://en.wikipedia.org/wiki/Four_color_theorem) into a SAT problem.
@@ -91,3 +93,13 @@ $ go run ./cmd/sat-solver/ -s <(echo p318 p429 p621 p927 p732 p835 p934 p243 p84
 2020/08/14 14:27:14 problem contains 729 variables and 11768 clauses
 2020/08/14 14:27:14 solution = p337 p179 p344 p773 p216 p243 p596 p297 p913 p975 p612 p467 p828 p571 p942 p224 p666 p986 p719 p968 p451 p857 p564 p156 p478 p393 p261 p787 p483 p369 p492 p525 p272 p863 p436 p798 p741 p754 p533 p621 p874 p322 p147 p684 p548 p991 p882 p835 p445 p934 p732 p552 p959 p846 p726 p285 p649 p429 p589 p162 p638 p258 p376 p811 p115 p131 p194 p899 p188 p381 p695 p123 p355 p239 p318 p653 p765 p517 p927 p414 p677
 ```
+
+# Cryptographic applications
+
+TODO
+
+# Future work
+
+- Read "The Art of Computer Programming Volume 4 Fascicle 6: Satisfiability"
+- Less naive implementation
+- Define a parallelized algorithm (to divide the work across cpu cores)
